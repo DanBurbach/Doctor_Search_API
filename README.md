@@ -1,3 +1,9 @@
+# Doctor Search API
+
+# Status: !!!UNDER CONSTRUCTION!!!
+
+## created by Daniel Burbach
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
