@@ -1,10 +1,3 @@
-# Doctor Search API
-
-## UNDER CONSTRUCTION - NON-WORKING
-
-### Created by Daniel Burbach
-### Using React.js, Redux, and RESTful API - provide a search result for doctors in your area.
-
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
