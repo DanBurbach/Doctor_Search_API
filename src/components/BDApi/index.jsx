@@ -23,7 +23,7 @@ function positiveResultIssue(query, location, promiseDoctor) {
             doctor.practices[0].accepts_new_patients
           );
 
-          (".doctor_result").append(`
+          (".doctor_result").append(
           <div class = "card">
             <div class = "card-body">
           <td><img src="{doctor.profile.image_url}"></img></td>
@@ -39,7 +39,7 @@ function positiveResultIssue(query, location, promiseDoctor) {
             <h5>Biography</h5>
               {doctor.profile.bio}
               </div>
-            </div><br>`);
+            </div><br>);
         });
       }
     },
@@ -78,7 +78,7 @@ function positiveResultName(first_name, last_name, location, promiseDoctor) {
             doctor.practices[0].accepts_new_patients
           );
 
-          (".doctor_result").append(`
+          (".doctor_result").append(
           <div class = "card">
             <div class = "card-body">
           <td><img src="{doctor.profile.image_url}"></img></td>
@@ -94,7 +94,7 @@ function positiveResultName(first_name, last_name, location, promiseDoctor) {
             <h5>Biography</h5>
               {doctor.profile.bio}
               </div>
-            </div><br>`);
+            </div><br>);
         });
       }
     },

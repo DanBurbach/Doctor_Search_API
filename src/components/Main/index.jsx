@@ -1,55 +1,75 @@
 import React, { Component } from "react";
 
-import { Doctor } from "./doctor.js";
-import { positiveResultIssue, positiveResultName } from "./BDApi";
+// import { Doctor } from "./doctor.js";
+// import { positiveResultIssue, positiveResultName } from "./BDApi";
 
-const doctors = new Doctor;
+// const doctors = new Doctor;
 
 class Main extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      results: [],
+      loading: true
+    };
   }
 
-  // componentDidMount () {
-  //   fetch('')
+  componentDidMount () {
+    this.performDoctorSearch();
+  }
+
+
+  performDoctorSearch = (query = 'query', location = ('user_location_state') + "-" + ('user_location_city')) => {
+    fetch(
+      `https://api.betterdoctor.com/2016-03-01/doctors?query=${query}&skip=0&limit=10&location=${location}&sort=best-match-asc&user_key=${process.env.exports.apiKey}`
+    )
+    .then(response => response.json())
+    .then(responseData => {
+      this.setState({
+        results: responseData.data,
+        loading: false
+      })
+    })
+    .catch(error => {
+      console.log('Error fetching and parsing data', error);
+    });
+  }
+
+  // issueSubmit (event) {
+  //   event.preventDefault();
+  //   // $(".doctor_result").text("");
+  //   const query = ("#query").val();
+  //   const location_full =
+  //     ("#user_location_state").val() + "-" + ("#user_location_city").val();
+  //   const location = location_full.toLowerCase();
+  //   const promiseDoctor = doctors.findDoctorIssue(query, location);
+  //   positiveResultIssue(query, location, promiseDoctor);
   // }
 
-  issueSubmit (event) {
-    event.preventDefault();
-    // $(".doctor_result").text("");
-    const query = ("#query").val();
-    const location_full =
-      ("#user_location_state").val() + "-" + ("#user_location_city").val();
-    const location = location_full.toLowerCase();
-    const promiseDoctor = doctors.findDoctorIssue(query, location);
-    positiveResultIssue(query, location, promiseDoctor);
-  }
-
-  nameSubmit (event) {
-    event.preventDefault();
-    // $(".doctor_result").text("");
-    const first_name = ("#first_name").val();
-    const last_name = ("#last_name").val();
-    const location_full =
-      ("#user_location_state").val() + "-" + ("#user_location_city").val();
-    const location = location_full.toLowerCase();
-    const promiseDoctor = doctors.findDoctorName(first_name, last_name, location);
-    positiveResultName(first_name, last_name, location, promiseDoctor);
-  }
+  // nameSubmit (event) {
+  //   event.preventDefault();
+  //   // $(".doctor_result").text("");
+  //   const first_name = ("#first_name").val();
+  //   const last_name = ("#last_name").val();
+  //   const location_full =
+  //     ("#user_location_state").val() + "-" + ("#user_location_city").val();
+  //   const location = location_full.toLowerCase();
+  //   const promiseDoctor = doctors.findDoctorName(first_name, last_name, location);
+  //   positiveResultName(first_name, last_name, location, promiseDoctor);
+  // }
 
   render() {
     return (
       <div>
-        <div class="inquire_issue">
+        <div className="inquire_issue">
           <form id="issueSearch">
             <h4>Enter your Medical Issue here:</h4>
-              <input type="text" id="query" class="form-input" onfocus="this.value=''"/>
+              <input type="text" id="query" className="form-input" onChange="this.value=''"/>
               <h4>Please enter your location here:</h4>
               City:
-              <input type="text" id="user_location_city" class="form-input" onfocus="this.value=''" value="portland"/>
+              <input type="text" id="user_location_city" className="form-input" onChange="this.value=''" value="portland"/>
               State:
-              <select required id="user_location_state" class="form-input">
+              <select required id="user_location_state" className="form-input">
                 <option value="al">Alabama</option>
                 <option value="ak">Alaska</option>
                 <option value="az">Arizona</option>
@@ -101,26 +121,26 @@ class Main extends Component {
                 <option value="wi">Wisconsin</option>
                 <option value="wy">Wyoming</option>
               </select>
-            <button class="btn-info" id="issueSubmit">Search Issue</button>
+            <button className="btn-info" id="issueSubmit">Search Issue</button>
           </form>
           </div>
 
-          <form>
+          {/* <form>
             <div id="nameSearch">
               <h6>(Optional: Search by Doctor's Name and Location):</h6>
               First Name:
-                <input type="text" id="first_name" class="form-input" onfocus="this.value=''"/>
+                <input type="text" id="first_name" className="form-input" onChange="this.value=''"/>
               Last Name:
-                <input type="text" id="last_name" class="form-input" onfocus="this.value=''"/>
-                <button class="btn-info" id="nameSubmit">Search Name</button>
+                <input type="text" id="last_name" className="form-input" onChange="this.value=''"/>
+                <button className="btn-info" id="nameSubmit">Search Name</button>
             </div>
-          </form>
+          </form> */}
 
-          <div class="result_area">
-            <div class="doctor_result">
+          <div className="result_area">
+            <div className="doctor_result">
               <ul></ul>
             </div>
-            <div class="error_message">
+            <div className="error_message">
               <ul></ul>
             </div>
           </div>
