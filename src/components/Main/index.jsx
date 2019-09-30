@@ -19,7 +19,7 @@ class Main extends Component {
 
   performDoctorSearch = (query = 'query', location = ('user_location_state') + "-" + ('user_location_city')) => {
     fetch(
-      `https://api.betterdoctor.com/2016-03-01/doctors?query=${query}&skip=0&limit=10&location=${location}&sort=best-match-asc&user_key=5048050055301b781ae84cb8a99e32ae`
+      `https://api.betterdoctor.com/2016-03-01/doctors?query=${query}&skip=0&limit=10&location=${location}&sort=best-match-asc&user_key=`
     )
       .then(response => response.json())
       .then(responseData => {
