@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import SearchIssue from "../SearchIssue";
 import IssueResults from '../IssueResults';
 
+
 class Main extends Component {
   constructor(props) {
     super(props);
@@ -17,10 +18,13 @@ class Main extends Component {
   }
 
 
-  performDoctorSearch = (query = 'query', location = ('user_location_state') + "-" + ('user_location_city')) => {
+  performDoctorSearch = (
+    query = 'query', 
+    location = ('user_location_state') + "-" + ('user_location_city'),
+    api_key = process.env.API_KEY) => {
     fetch(
-      `https://api.betterdoctor.com/2016-03-01/doctors?query=${query}&skip=0&limit=10&location=${location}&sort=best-match-asc&user_key=`
-    )
+      `https://api.betterdoctor.com/2016-03-01/doctors?query=${query}&skip=0&limit=10&location=${location}&sort=best-match-asc&user_key=${api_key}`
+    )    
       .then(response => response.json())
       .then(responseData => {
         this.setState({
