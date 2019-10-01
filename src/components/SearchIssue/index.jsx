@@ -13,8 +13,8 @@ class SearchIssue extends Component {
 
   handleSubmitIssue = event => {
     event.preventDefault();
-    this.props.onSearch(this.query.value);
-    event.currentTarget.reset();
+    this.props.onSearch(this.state.searchText);
+    // event.currentTarget.reset();
   };
 
   render() {

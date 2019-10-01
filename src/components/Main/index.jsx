@@ -13,20 +13,20 @@ class Main extends Component {
     };
   }
 
-  componentDidMount () {
-    this.performDoctorSearch();
-  }
-
+  // componentDidMount () {
+  //   this.performDoctorSearch();
+  // }
 
   performDoctorSearch = (
     query = 'query', 
-    location = ('user_location_state') + "-" + ('user_location_city'),
+    location = ('user_location_state' + "-" + 'user_location_city'),
     api_key = process.env.API_KEY) => {
     fetch(
       `https://api.betterdoctor.com/2016-03-01/doctors?query=${query}&skip=0&limit=10&location=${location}&sort=best-match-asc&user_key=${api_key}`
     )    
       .then(response => response.json())
       .then(responseData => {
+        console.log(responseData);
         this.setState({
           results: responseData.results,
           loading: false
@@ -44,12 +44,14 @@ class Main extends Component {
         <div>
           {this.state.loading ? (
             <p>Loading...</p>
-          ) : <IssueResults results={this.state.results} />
-              }
-            )
-          }}
+          ) : (
+            <ul>
+              <IssueResults results={this.state.results} />
+            </ul>
+          )}
         </div>
       </div>
-    )}
+    );
+  }
 }
 export default Main;
